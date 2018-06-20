@@ -51,7 +51,7 @@ app
 router.get('/getbar',async(ctx,next)=>{
     ctx.response.body = {
         code:11,
-        data:[{title:'随记',url:'#'},{title:'乱记',url:'#'},{title:'二十四字',url:'#'}]
+        data:[{title:'G记',url:'/git'},{title:'DEMO',url:'/demo'},{title:'二十四字',url:'/loveCCPloveXjp'}]
     }
 });
 router.get('/githubrep',async(ctx,next)=>{
