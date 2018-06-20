@@ -1,5 +1,6 @@
 // require('babel-register');
 const Koa    = require('koa');
+const logger = require('koa-logger')
 const app    = new Koa();
 const router = require('koa-router')();
 const cors   = require('koa2-cors');
@@ -8,6 +9,15 @@ const req    = require('request');
 const API    = require('./api');
 const UTIL   = require('./util');
 const fs     = require('fs');
+const mon = require('./app/controller/paper')
+
+const mongoose = require('mongoose')
+
+const db = 'mongodb://localhost/blog'
+
+
+mongoose.Promise = require('bluebird')
+mongoose.connect(db)
 
 function get(url) {
     return new Promise((resolve)=>{
@@ -18,7 +28,6 @@ function get(url) {
                 'OAUTH-TOKEN':'123e9fd6246fa0ec3bce06571091dcafc050a2cc' 
             }
         },(err,res,body)=>{
-            console.log(body)
             if(!err) {
                 resolve(body)
                 // ctx.response.body = {
@@ -31,6 +40,7 @@ function get(url) {
     })
 }
 
+app.use(logger())
 app.use(cors({
     origin: function (ctx) {
         // if (ctx.url === '/test') {
@@ -51,7 +61,7 @@ app
 router.get('/getbar',async(ctx,next)=>{
     ctx.response.body = {
         code:11,
-        data:[{title:'G记',url:'/git'},{title:'DEMO',url:'/demo'},{title:'二十四字',url:'/loveCCPloveXjp'}]
+        data:[{title:'首页',url:'/'},{title:'G记',url:'/git'},{title:'DEMO',url:'/demo'},{title:'二十四字',url:'/loveCCPloveXjp'}]
     }
 });
 router.get('/githubrep',async(ctx,next)=>{
@@ -62,6 +72,16 @@ router.get('/githubrep',async(ctx,next)=>{
         code:11,
         data:UTIL.getSpeObj(JSON.parse(res),['name','html_url','description','url','stargazers_count','language'])
     }
+})
+router.get('/mon',async(ctx,next)=>{
+    // let res = await get(API.git.getrepo);
+    // fs.writeFileSync('./db.txt',JSON.stringify(UTIL.getSpeObj(JSON.parse(res),['name','html_url','description','url','stargazers_count','language'])));
+    // let res = fs.readFileSync('./db.txt');
+    // ctx.response.body = {
+    //     code:11,
+    //     data:UTIL.getSpeObj(JSON.parse(res),['name','html_url','description','url','stargazers_count','language'])
+    // }
+    mon();
 })
 
 
