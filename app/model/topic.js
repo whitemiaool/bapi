@@ -13,14 +13,7 @@ let ObjectId = Schema.Types.ObjectId;
  */
 let UserSchema = new Schema({
     // topic:{type:ObjectId,ref:'user'},
-    title:String,
-    brief:String,
-    content:String,
-    img:[{type:String}],
-    comments:[{name:String,content:String}],
-    star:Number,
-    paperid:Number,
-    addones:Number,
+    name:String,
     meta: {
         createAt: {
         type: Date,
@@ -51,7 +44,7 @@ UserSchema.pre('save', function(next) {
  * @type {[type]}
  */
 // 参数User 数据库中的集合名称, 不存在会创建.
-let User = mongoose.model('paper', UserSchema)
+let User = mongoose.model('topic', UserSchema)
 
 module.exports = User
 
