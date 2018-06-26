@@ -12,7 +12,7 @@ let ObjectId = Schema.Types.ObjectId;
  * @type {mongoose}
  */
 let UserSchema = new Schema({
-    // topic:{type:ObjectId,ref:'user'},
+    topic:{type:ObjectId,ref:'topic'},
     title:String,
     brief:String,
     content:String,

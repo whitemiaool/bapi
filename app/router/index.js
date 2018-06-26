@@ -1,6 +1,8 @@
 const router = require('koa-router')();
-const Paper = require('../controller/paper');
-const Topic = require('../controller/topic');
+const Paper  = require('../controller/paper');
+const Topic  = require('../controller/topic');
+const UTIL   = require('../../util');
+const fs     = require('fs')
 
 router.get('/getbar',async(ctx,next)=>{
     ctx.response.body = {
@@ -21,10 +23,17 @@ router.get('/mon',async(ctx,next)=>{
     mon();
 })
 
-router.post('/addonepaper',async(ctx,next)=>{
-    console.log(ctx.request.body);
-})
+router.post('/addonepaper',Paper.addone)
 
 router.post('/addonetopic',Topic.addone)
+
+router.get('/getallpaper',Paper.getallpaper)
+
+
+
+
+router.get('/getalltopic',Topic.getalltopic)
+
+router.post('/delonetopic',Topic.delonetopic)
 
 module.exports = router

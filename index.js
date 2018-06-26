@@ -8,13 +8,12 @@ const req    = require('request');
 const bodyParser = require('koa-bodyparser');
 
 const API    = require('./api');
-const UTIL   = require('./util');
 const fs     = require('fs');
 const mon = require('./app/controller/paper')
 
 const mongoose = require('mongoose')
 
-const db = 'mongodb://localhost/blog'
+const db = 'mongodb://dyxuan.top:28010/blog'
 
 
 mongoose.Promise = require('bluebird')
