@@ -43,4 +43,9 @@ exports.getclick = async function(ctx,next) {
     }
 }
 
+exports.saveclick = async function(ctx,next){
+    let papers = await Wx.find();
+    Wx.where({ _id: papers[0]._id }).update({ times: papers[0].times+1 });
+};
+
     

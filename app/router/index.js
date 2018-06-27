@@ -39,6 +39,9 @@ router.post('/delonetopic',Topic.delonetopic)
 
 router.get('/getClick',Wx.getclick);
 
+router.get('/saveclick',Wx.saveclick);
+
+
 // router.post('/saveClick',(ctx,next)=>{
 //     n++;
 //     clearTimeout(timer);
