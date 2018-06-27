@@ -24,13 +24,22 @@ delone = (db,id)=>{
 
 exports.getclick = async function(ctx,next) {
     let papers = await Wx.find();
-    // if(papers) {
-
-    // }
-    ctx.response.body = {
-        code:11,
-        data:papers,
-        msg:'success'
+    if(papers[0]) {
+        ctx.response.body = {
+            code:11,
+            data:papers[0].times,
+            msg:'success'
+        }
+    } else {
+        let paper = new Wx({
+            times:10,
+        })
+        await paper.save();
+        ctx.response.body = {
+            code:11,
+            data:10,
+            msg:'success'
+        }
     }
 }
 
