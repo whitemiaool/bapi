@@ -13,7 +13,7 @@ const mon = require('./app/controller/paper')
 
 const mongoose = require('mongoose')
 
-const db = 'mongodb://dyxuan.top:28010/blog'
+const db = 'mongodb://118.24.13.151:28010/blog'
 
 
 mongoose.Promise = require('bluebird')
@@ -62,6 +62,6 @@ let router = require('./app/router')
 app
   .use(router.routes())
   .use(router.allowedMethods());
-app.listen(3001);
+app.listen(3000);
 
 

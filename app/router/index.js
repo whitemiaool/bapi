@@ -37,7 +37,7 @@ router.get('/getalltopic',Topic.getalltopic)
 
 router.post('/delonetopic',Topic.delonetopic)
 
-router.get('/getClick',Wx.getclick);
+router.get('/getclick',Wx.getclick);
 
 router.get('/saveclick',Wx.saveclick);
 
