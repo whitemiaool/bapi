@@ -1,6 +1,7 @@
 const router = require('koa-router')();
 const Paper  = require('../controller/paper');
 const Topic  = require('../controller/topic');
+const Wx  = require('../controller/wx');
 const UTIL   = require('../../util');
 const fs     = require('fs')
 
@@ -35,5 +36,20 @@ router.get('/getallpaper',Paper.getallpaper)
 router.get('/getalltopic',Topic.getalltopic)
 
 router.post('/delonetopic',Topic.delonetopic)
+
+router.get('/getClick',Wx.getclick);
+
+// router.post('/saveClick',(ctx,next)=>{
+//     n++;
+//     clearTimeout(timer);
+//     timer = setTimeout(()=>{
+//         let data =JSON.parse( fs.readFileSync(db,'utf-8'));          
+//         let savedata = JSON.stringify({click:data.click-0+n})
+//         fs.writeFileSync(db,savedata);
+//         n = 0;
+//     },)
+//     ctx.body ={code:1,msg:''};
+//     next()
+// });
 
 module.exports = router
