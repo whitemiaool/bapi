@@ -2,6 +2,13 @@ const mongoose =  require('mongoose');
 const Paper = require('../model/paper');
 const cherrio = require('cheerio');
 
+delone = (db,id)=>{
+    return new Promise((res)=>{
+        db.remove({'_id':`${id}`},(err)=>{
+            res(err)
+        })
+    })
+}
 
 
 exports.addone = async function(ctx,next) {
@@ -43,6 +50,22 @@ exports.getallpaper = async function(ctx,next) {
         code:11,
         msg:'success',
         data:res
+    }
+}
+
+exports.delonepaper = async function(ctx,next) {
+    let id = ctx.request.body.data;
+    let err = await delone(Paper,id);
+    if(err) {
+        ctx.response.body = {
+            code:01,
+            msg:err
+        }
+    } else {
+        ctx.response.body = {
+            code:11,
+            msg:'success'
+        }
     }
 }
     

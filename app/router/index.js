@@ -30,6 +30,9 @@ router.post('/addonetopic',Topic.addone)
 
 router.get('/getallpaper',Paper.getallpaper)
 
+router.post('/delonepaper',Paper.delonepaper)
+
+
 
 
 
