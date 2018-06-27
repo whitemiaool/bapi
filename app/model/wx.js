@@ -44,7 +44,7 @@ UserSchema.pre('save', function(next) {
  * @type {[type]}
  */
 // 参数User 数据库中的集合名称, 不存在会创建.
-let User = mongoose.model('topic', UserSchema)
+let User = mongoose.model('wx', UserSchema)
 
 module.exports = User
 
