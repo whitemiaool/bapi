@@ -8,7 +8,7 @@ const fs     = require('fs')
 router.get('/getbar',async(ctx,next)=>{
     ctx.response.body = {
         code:11,
-        data:[{title:'首页',url:'/'},{title:'G记',url:'/git'},{title:'DEMO',url:'/demo'},{title:'二十四字',url:'/loveCCPloveXjp'}]
+        data:[{title:'首页',url:'/index'},{title:'G记',url:'/index/git'},{title:'DEMO',url:'/index/demo'},{title:'二十四字',url:'/index/loveCCPloveXjp'}]
     }
 });
 router.get('/githubrep',async(ctx,next)=>{
@@ -29,16 +29,26 @@ router.post('/addonepaper',Paper.addone)
 router.post('/addonetopic',Topic.addone)
 
 router.get('/getallpaper',Paper.getallpaper)
+router.post('/getonepaper',Paper.getonepaper)
 
 router.post('/delonepaper',Paper.delonepaper)
 
 
 
+router.post('/commentpaper',Paper.commentpaper)
+router.post('/getpapercom',Paper.getpapercom)
+router.post('/starcomment',Paper.starcomment)
+
+
+router.post('/clickstar',Paper.clickstar)
 
 
 router.get('/getalltopic',Topic.getalltopic)
 
 router.post('/delonetopic',Topic.delonetopic)
+
+
+
 
 router.get('/getclick',Wx.getclick);
 

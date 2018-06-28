@@ -7,6 +7,36 @@ exports.getSpeObj = function(obj,arr) {
         }
         res[i] = rj;
     }
-    console.log(res)
     return res
+}
+
+
+exports.delone = (db,id)=>{
+    return new Promise((res)=>{
+        db.remove({'_id':`${id}`},(err)=>{
+            res(err)
+        })
+    })
+}
+
+exports.update = (db,o1,o2)=>{
+    return new Promise((res)=>{
+        db.update(o1,o2,(err,doc)=>{
+            res(err)
+        })
+    })
+}
+
+exports.res = function(err,ctx) {
+    if(err) {
+        ctx.response.body = {
+            code:01,
+            msg:err
+        }
+    } else {
+        ctx.response.body = {
+            code:11,
+            msg:'success'
+        }
+    }
 }
