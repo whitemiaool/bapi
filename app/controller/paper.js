@@ -101,10 +101,11 @@ exports.clickstar = async function(ctx) {
 exports.commentpaper = async function(ctx) {
     let id = ctx.request.body.id;
     let com = ctx.request.body.comm;
+    let name = ctx.request.body.name || '小米';
     let pa = await Com.find({'paperid':id});
     let cs = pa[0]&&pa[0].comments||[];
     let zz = {
-        name:'小明',
+        name:name,
         content:com,
         star:0,
         date:Date.now()
@@ -121,7 +122,7 @@ exports.commentpaper = async function(ctx) {
         ctx.response.body = {
             code:11,
             msg:'success',
-            data:cs
+            data:zz
         }
         return
     } else {
@@ -135,7 +136,7 @@ exports.commentpaper = async function(ctx) {
             ctx.response.body = {
                 code:11,
                 msg:'success',
-                data:cs
+                data:zz
             }
         }
     }
@@ -146,10 +147,10 @@ exports.getpapercom = async function(ctx) {
     let page = ctx.request.body.page;
     let pa = await Com.find({'paperid':id});
     if(pa[0]) {
-        let res = pa[0].comments.slice(page*10-10,page*10);
-        res = res.sort((a,b)=>{
+        let res = pa[0].comments.sort((a,b)=>{
             return b.star - a.star
         })
+        res = res.slice(page*10-10,page*10);
         ctx.response.body = {
             code:11,
             msg:'success',
