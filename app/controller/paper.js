@@ -1,4 +1,9 @@
 // const mongoose =  require('mongoose');
+
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema;
+const ObjectId = mongoose.Types.ObjectId
+
 const Paper = require('../model/paper');
 const Com = require('../model/comment');
 const Inx = require('../model/paperindex');
@@ -55,6 +60,22 @@ exports.addone = async function(ctx,next) {
             msg:'success'
         }
     }
+}
+
+exports.updatepaper = async function (ctx) {
+    let b = ctx.request.body;
+    let bf = cherrio.load(b.content).text();
+    bf = bf.slice(0,75);
+    if(bf.length > 75) {
+        bf = bf+'...'
+    }
+    let err = await util.update(Paper,{'_id':b.id},{
+        topic:b.topic,
+        title:b.tl,
+        brief:bf,
+        content:b.content,
+    })
+    util.res(err,ctx)
 }
 
 exports.getallpaper = async function(ctx,next) {
@@ -181,4 +202,23 @@ exports.starcomment = async function(ctx) {
     // let star = pa[0].star||0
     let err = await util.update(Com,{'_id':pa[0]._id},{comments:JSON.parse(JSON.stringify(cm))});
     util.res(err,ctx);
+}
+
+exports.getpact =  async function (ctx) {
+    let id  = ctx.request.body.id;
+    if(id) {
+        console.log(id)
+        // await Com.find({'paperid':id});
+        let p =await Paper.find({'topic':id});
+        ctx.response.body = {
+            code:11,
+            msg:'success',
+            data:p
+        }
+        return
+    }
+    ctx.response.body = {
+        code:01,
+        msg:'error',
+    }
 }

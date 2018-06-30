@@ -25,6 +25,7 @@ router.get('/mon',async(ctx,next)=>{
 })
 
 router.post('/addonepaper',Paper.addone)
+router.post('/updatepaper',Paper.updatepaper)
 
 router.post('/addonetopic',Topic.addone)
 
@@ -32,6 +33,7 @@ router.get('/getallpaper',Paper.getallpaper)
 router.post('/getonepaper',Paper.getonepaper)
 
 router.post('/delonepaper',Paper.delonepaper)
+router.post('/getpact',Paper.getpact)
 
 
 
