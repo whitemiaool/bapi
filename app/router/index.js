@@ -7,8 +7,9 @@ const fs     = require('fs')
 
 router.get('/getbar',async(ctx,next)=>{
     ctx.response.body = {
+        // {title:'DEMO',url:'/index/demo'}
         code:11,
-        data:[{title:'首页',url:'/index'},{title:'G记',url:'/index/git'},{title:'DEMO',url:'/index/demo'},{title:'二十四字',url:'/index/loveCCPloveXjp'}]
+        data:[{title:'首页',url:'/index'},{title:'开源',url:'/index/git'},{title:'二十四字',url:'/index/loveCCPloveXjp'}]
     }
 });
 router.get('/githubrep',async(ctx,next)=>{
