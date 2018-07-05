@@ -79,7 +79,9 @@ exports.updatepaper = async function (ctx) {
 }
 
 exports.getallpaper = async function(ctx,next) {
-    let res = await Paper.find().populate('topic');
+    let index = ctx.request.body.page;
+    console.log('index',index)
+    let res = await Paper.find().populate('topic').sort({'star':-1}).limit(3).skip(3*(index-1));
     ctx.response.body = {
         code:11,
         msg:'success',
@@ -209,7 +211,7 @@ exports.getpact =  async function (ctx) {
     if(id) {
         console.log(id)
         // await Com.find({'paperid':id});
-        let p =await Paper.find({'topic':id});
+        let p =await Paper.find({'topic':id}).populate('topic');
         ctx.response.body = {
             code:11,
             msg:'success',
