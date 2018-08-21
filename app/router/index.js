@@ -4,15 +4,7 @@ const Topic  = require('../controller/topic');
 const Wx  = require('../controller/wx');
 const UTIL   = require('../../util');
 const fs     = require('fs');
-const request = require('request')
-
-function getXB(q) {
-    return new Promise((res)=>{
-        request(`https://www.bing.com/socialagent/chat?q=${q}&anid=${Math.random()}`,function(error, response, body){
-            res(body)
-        })
-    })
-}
+const axios = require('axios');
 
 router.get('/getbar',async(ctx,next)=>{
     ctx.response.body = {
@@ -61,11 +53,10 @@ router.post('/delonetopic',Topic.delonetopic)
 
 router.post('/xiaobing',async (ctx,next)=>{
     let q = ctx.request.body.q;
-    let res = await getXB(q);
+    let res = await axios.get(`https://www.bing.com/socialagent/chat?q=${q}&anid=${Math.random()}`);
     ctx.response.body = {
-        // {title:'DEMO',url:'/index/demo'}
         code:11,
-        data:res
+        data:res.data
     }
 
 })
