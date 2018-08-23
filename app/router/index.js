@@ -2,6 +2,8 @@ const router = require('koa-router')();
 const Paper  = require('../controller/paper');
 const Topic  = require('../controller/topic');
 const Wx  = require('../controller/wx');
+const NavPage  = require('../controller/navpage');
+
 const UTIL   = require('../../util');
 const fs     = require('fs');
 const axios = require('axios');
@@ -53,12 +55,11 @@ router.post('/delonetopic',Topic.delonetopic)
 
 router.post('/xiaobing',async (ctx,next)=>{
     let q = ctx.request.body.q;
-    let res = await axios.get(`https://www.bing.com/socialagent/chat?q=${q}&anid=${Math.random()}`);
+    let res = await axios.get(`https://www.bing.com/socialagent/chat?q=${q}&anid=1712151`);
     ctx.response.body = {
         code:11,
         data:res.data
     }
-
 })
 
 
@@ -76,4 +77,7 @@ router.get('/demo',async (ctx,next)=>{
         {title:'如何解决史诗级BUG',breif:'快速解决BUG的一种解决方案',url:'/demo/how2s?q=记乎--一个记不住的网站'}]
     }
 })
+
+
+router.get('/getweather',NavPage.getWeather)
 module.exports = router
