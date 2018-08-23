@@ -55,7 +55,7 @@ router.post('/delonetopic',Topic.delonetopic)
 
 router.post('/xiaobing',async (ctx,next)=>{
     let q = ctx.request.body.q;
-    let res = await axios.get(`https://www.bing.com/socialagent/chat?q=${q}&anid=1712151`);
+    let res = await axios.get(`https://www.bing.com/socialagent/chat?q=${encodeURI(q)}&anid=1712151`);
     ctx.response.body = {
         code:11,
         data:res.data
